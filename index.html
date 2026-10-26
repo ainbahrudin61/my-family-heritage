@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Family Heritage</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="main-header">
+    <p class="eyebrow">OUR ROOTS, OUR STORY</p>
+    <h1>My Family Heritage</h1>
+    <p>Discover the people and relationships that make up our family.</p>
+</header>
+
+<main class="container">
+
+    <section class="overview">
+        <div>
+            <p class="eyebrow">FAMILY DIRECTORY</p>
+            <h2>Our Family Tree</h2>
+            <p>Explore three generations of our family.</p>
+        </div>
+
+        <div class="member-count">
+            <span id="memberCount">0</span>
+            <small>Family Members</small>
+        </div>
+    </section>
+
+    <section class="tree-panel">
+        <div class="section-heading">
+            <h2>Family Relationships</h2>
+            <p>Parents, children and family connections</p>
+        </div>
+
+        <div class="legend">
+            <span><i class="dot grandparent"></i> Grandparents</span>
+            <span><i class="dot parent"></i> Parents</span>
+            <span><i class="dot child"></i> Children</span>
+        </div>
+
+        <div id="familyTree" class="family-tree">
+            <p>Loading family tree...</p>
+        </div>
+
+        <p id="message" class="status-message" role="status">
+            Loading family data...
+        </p>
+    </section>
+
+    <section class="directory-section">
+        <h2>Family Members</h2>
+        <p>Search for a family member to view their relationships.</p>
+
+        <div class="member-controls">
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search family members..."
+                aria-label="Search family members"
+            >
+
+            <select id="generationFilter" aria-label="Filter by generation">
+                <option value="all">All Generations</option>
+                <option value="1">Generation 1</option>
+                <option value="2">Generation 2</option>
+                <option value="3">Generation 3</option>
+            </select>
+        </div>
+
+        <div id="familyList" class="family-list"></div>
+
+        <div id="relationshipDetails" class="relationship-details" hidden>
+            <h3 id="relationshipTitle">Family Relationships</h3>
+            <div id="relationshipContent"></div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>My Family Heritage &copy; 2026</p>
+</footer>
+
+<script src="js/model.js"></script>
+<script src="js/view.js"></script>
+<script src="js/controller.js"></script>
+
+</body>
+</html>

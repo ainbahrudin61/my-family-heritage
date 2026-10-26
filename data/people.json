@@ -1,0 +1,75 @@
+
+[
+  {
+    "id": "g1",
+    "name": "Md Amin",
+    "gender": "Male",
+    "fatherId": null,
+    "motherId": null,
+    "spouses": [{"id": "g2", "status": "married"}]
+  },
+  {
+    "id": "g2",
+    "name": "Saleha",
+    "gender": "Female",
+    "fatherId": null,
+    "motherId": null,
+    "spouses": [{"id": "g1", "status": "married"}]
+  },
+  {
+    "id": "g3",
+    "name": "Md Ramli",
+    "gender": "Male",
+    "fatherId": null,
+    "motherId": null,
+    "spouses": [{"id": "g4", "status": "married"}]
+  },
+  {
+    "id": "g4",
+    "name": "Nassim",
+    "gender": "Female",
+    "fatherId": null,
+    "motherId": null,
+    "spouses": [{"id": "g3", "status": "married"}]
+  },
+  {
+    "id": "g5",
+    "name": "Norhayati",
+    "gender": "Female",
+    "fatherId": "g1",
+    "motherId": "g2",
+    "spouses": [{"id": "g6", "status": "married"}]
+  },
+  {
+    "id": "g6",
+    "name": "Bahrudin",
+    "gender": "Male",
+    "fatherId": "g3",
+    "motherId": "g4",
+    "spouses": [{"id": "g5", "status": "married"}]
+  },
+  {
+    "id": "g7",
+    "name": "Nur'Ain",
+    "gender": "Female",
+    "fatherId": "g6",
+    "motherId": "g5",
+    "spouses": []
+  },
+  {
+    "id": "g8",
+    "name": "Muhammad Hafiz",
+    "gender": "Male",
+    "fatherId": "g6",
+    "motherId": "g5",
+    "spouses": []
+  },
+  {
+    "id": "g9",
+    "name": "Nur Alisha",
+    "gender": "Female",
+    "fatherId": "g6",
+    "motherId": "g5",
+    "spouses": []
+  }
+]
