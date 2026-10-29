@@ -175,64 +175,60 @@ const FamilyView = {
     },
 
     // Display family relationships in a popup
-    showRelationships(person, father, mother, spouseNames, children) {
-        const modal = document.getElementById("relationshipModal");
-        const title = document.getElementById("relationshipTitle");
-        const content = document.getElementById("relationshipContent");
+    showRelationships(person, father, mother, spouseNames, children, siblings) {
+    const modal = document.getElementById("relationshipModal");
+    const title = document.getElementById("relationshipTitle");
+    const content = document.getElementById("relationshipContent");
 
-        if (!modal || !title || !content) {
-            console.error("Relationship popup elements were not found.");
-            return;
+    title.textContent = `${person.name}'s Family Relationships`;
+    content.replaceChildren();
+
+    // Format Date of Birth
+    const dob = person.dob
+        ? new Date(person.dob + "T00:00:00").toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        })
+        : "Unknown";
+
+    // Display only these four details
+    const details = [
+        {
+            label: "Father",
+            value: father?.name || "Unknown"
+        },
+        {
+            label: "Mother",
+            value: mother?.name || "Unknown"
+        },
+        {
+            label: "Sibling",
+            value: siblings.map(sibling => sibling.name).join(", ") || "None"
+        },
+        {
+            label: "Date of Birth",
+            value: dob
         }
+    ];
 
-        // Set popup title
-        title.textContent = `${person.name}'s Family Relationships`;
+    details.forEach(detail => {
+        const item = document.createElement("div");
+        item.className = "relationship-item";
 
-        // Clear previous information
-        content.replaceChildren();
+        const label = document.createElement("strong");
+        label.textContent = detail.label;
 
-        // Relationship information
-        const details = [
-            {
-                label: "Father",
-                value: father?.name || "Unknown"
-            },
-            {
-                label: "Mother",
-                value: mother?.name || "Unknown"
-            },
-            {
-                label: "Spouse",
-                value: spouseNames.join(", ") || "None recorded"
-            },
-            {
-                label: "Children",
-                value: children.map(child => child.name).join(", ") ||
-                    "None recorded"
-            }
-        ];
+        const value = document.createElement("p");
+        value.textContent = detail.value;
 
-        // Create relationship information cards
-        details.forEach(detail => {
-            const item = document.createElement("div");
-            item.className = "relationship-item";
+        item.append(label, value);
+        content.appendChild(item);
+    });
 
-            const label = document.createElement("strong");
-            label.textContent = detail.label;
-
-            const value = document.createElement("p");
-            value.textContent = detail.value;
-
-            item.append(label, value);
-            content.appendChild(item);
-        });
-
-        // Show popup
-        modal.hidden = false;
-
-        // Focus on close button
-        document.getElementById("closeRelationshipModal")?.focus();
-    }
+    modal.hidden = false;
+    document.getElementById("closeRelationshipModal").focus();
+}
 };
 
 

@@ -15,7 +15,7 @@ const FamilyController = {
 
             FamilyView.renderFamilyTree(generations);
 
-            // Store each person's generation number (1, 2, 3...)
+            // Store each person's generation number
             people.forEach(person => {
                 const index = generations.findIndex(group =>
                     group.some(member => member.id === person.id)
@@ -68,7 +68,8 @@ const FamilyController = {
             // Display all members when the page loads
             filterMembers();
 
-            message.textContent = "Family data loaded successfully.";
+            message.textContent =
+                "Family data loaded successfully.";
 
         } catch (error) {
             console.error(error);
@@ -133,29 +134,41 @@ const FamilyController = {
     },
 
     showRelationships(id) {
-        const person = FamilyModel.getPersonById(id);
+        // Get all family members from the model
+        const people = FamilyModel.people;
+
+        const person = people.find(p => p.id === id);
 
         if (!person) return;
 
-        const father = FamilyModel.getPersonById(person.fatherId);
-        const mother = FamilyModel.getPersonById(person.motherId);
-
-        const spouseNames = (person.spouses || [])
-            .map(spouse => FamilyModel.getPersonById(spouse.id))
-            .filter(Boolean)
-            .map(spouse => spouse.name);
-
-        const children = FamilyModel.people.filter(child =>
-            child.fatherId === person.id ||
-            child.motherId === person.id
+        // Find father and mother
+        const father = people.find(p =>
+            p.id === person.fatherId
         );
 
+        const mother = people.find(p =>
+            p.id === person.motherId
+        );
+
+        // Find siblings who share the same father or mother
+        const siblings = people.filter(p =>
+            p.id !== person.id &&
+            (
+                (person.fatherId &&
+                    p.fatherId === person.fatherId) ||
+                (person.motherId &&
+                    p.motherId === person.motherId)
+            )
+        );
+
+        // Send only the information needed by the popup
         FamilyView.showRelationships(
             person,
             father,
             mother,
-            spouseNames,
-            children
+            [],
+            [],
+            siblings
         );
     }
 };

@@ -4,6 +4,7 @@
     "id": "g1",
     "name": "Md Amin",
     "gender": "Male",
+    "dob": "1945-04-19",
     "fatherId": null,
     "motherId": null,
     "spouses": [{"id": "g2", "status": "married"}]
@@ -12,6 +13,7 @@
     "id": "g2",
     "name": "Saleha",
     "gender": "Female",
+    "dob": "1948-06-19",
     "fatherId": null,
     "motherId": null,
     "spouses": [{"id": "g1", "status": "married"}]
@@ -20,6 +22,7 @@
     "id": "g3",
     "name": "Md Ramli",
     "gender": "Male",
+    "dob": "1948-06-14",
     "fatherId": null,
     "motherId": null,
     "spouses": [{"id": "g4", "status": "married"}]
@@ -28,6 +31,7 @@
     "id": "g4",
     "name": "Nassim",
     "gender": "Female",
+    "dob": "1973-06-19",
     "fatherId": null,
     "motherId": null,
     "spouses": [{"id": "g3", "status": "married"}]
@@ -36,6 +40,7 @@
     "id": "g5",
     "name": "Norhayati",
     "gender": "Female",
+    "dob": "1973-11-18",
     "fatherId": "g1",
     "motherId": "g2",
     "spouses": [{"id": "g6", "status": "married"}]
@@ -44,6 +49,7 @@
     "id": "g6",
     "name": "Bahrudin",
     "gender": "Male",
+    "dob": "1971-04-14",
     "fatherId": "g3",
     "motherId": "g4",
     "spouses": [{"id": "g5", "status": "married"}]
@@ -52,6 +58,7 @@
     "id": "g7",
     "name": "Nur'Ain",
     "gender": "Female",
+    "dob": "2004-04-16",
     "fatherId": "g6",
     "motherId": "g5",
     "spouses": []
@@ -60,6 +67,7 @@
     "id": "g8",
     "name": "Muhammad Hafiz",
     "gender": "Male",
+    "dob": "2006-11-30",
     "fatherId": "g6",
     "motherId": "g5",
     "spouses": []
@@ -68,6 +76,7 @@
     "id": "g9",
     "name": "Nur Alisha",
     "gender": "Female",
+    "dob": "2009-06-09",
     "fatherId": "g6",
     "motherId": "g5",
     "spouses": []
