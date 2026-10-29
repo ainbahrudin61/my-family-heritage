@@ -4,90 +4,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>My Family Heritage</title>
+
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-<header class="main-header">
-    <p class="eyebrow">OUR ROOTS, OUR STORY</p>
-    <h1>My Family Heritage</h1>
-    <p>Discover the people and relationships that make up our family.</p>
-</header>
+    <!-- Header -->
+    <header class="main-header" id="home">
+        <p class="eyebrow">OUR ROOTS, OUR STORY</p>
+        <h1>My Family Heritage</h1>
+        <p>Discover the people and relationships that make up our family.</p>
+    </header>
 
-<main class="container">
+    <!-- Navigation Menu -->
+    <nav class="main-navigation" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#familyTreeSection">Family Tree</a>
+        <a href="#directorySection">Family Directory</a>
+        <a href="#aboutSection">About</a>
+    </nav>
 
-    <section class="overview">
-        <div>
-            <p class="eyebrow">FAMILY DIRECTORY</p>
-            <h2>Our Family Tree</h2>
-            <p>Explore three generations of our family.</p>
-        </div>
+    <main class="container">
 
-        <div class="member-count">
-            <span id="memberCount">0</span>
-            <small>Family Members</small>
-        </div>
-    </section>
+        <!-- Family Overview -->
+        <section class="overview">
+            <div>
+                <p class="eyebrow">FAMILY DIRECTORY</p>
+                <h2>Our Family Tree</h2>
+                <p>Explore three generations of our family.</p>
+            </div>
 
-    <section class="tree-panel">
-        <div class="section-heading">
-            <h2>Family Relationships</h2>
-            <p>Parents, children and family connections</p>
-        </div>
+            <div class="member-count">
+                <span id="memberCount">0</span>
+                <small>Family Members</small>
+            </div>
+        </section>
 
-        <div class="legend">
-            <span><i class="dot grandparent"></i> Grandparents</span>
-            <span><i class="dot parent"></i> Parents</span>
-            <span><i class="dot child"></i> Children</span>
-        </div>
+        <!-- Family Tree -->
+        <section class="tree-panel" id="familyTreeSection">
 
-        <div id="familyTree" class="family-tree">
-            <p>Loading family tree...</p>
-        </div>
+            <div class="section-heading">
+                <h2>Family Relationships</h2>
+                <p>
+                    Explore the connections between parents,
+                    spouses and children.
+                </p>
+            </div>
 
-        <p id="message" class="status-message" role="status">
-            Loading family data...
-        </p>
-    </section>
+            <!-- Family Tree Legend -->
+            <div class="legend">
+                <span>
+                    <i class="dot grandparent"></i>
+                    Grandparents
+                </span>
 
-    <section class="directory-section">
-        <h2>Family Members</h2>
-        <p>Search for a family member to view their relationships.</p>
+                <span>
+                    <i class="dot parent"></i>
+                    Parents
+                </span>
 
-        <div class="member-controls">
-            <input
-                type="search"
-                id="searchInput"
-                placeholder="Search family members..."
-                aria-label="Search family members"
+                <span>
+                    <i class="dot child"></i>
+                    Children
+                </span>
+            </div>
+
+            <!-- Family Tree Display -->
+            <div id="familyTree" class="family-tree">
+                <p>Loading family tree...</p>
+            </div>
+
+            <!-- Status Message -->
+            <p id="message" class="status-message" role="status">
+                Loading family data...
+            </p>
+
+        </section>
+
+        <!-- Family Directory -->
+        <section class="directory-section" id="directorySection">
+
+            <h2>Explore Family Members</h2>
+
+            <p>
+                Search, filter and select family members
+                to explore their relationships.
+            </p>
+
+            <!-- Search and Generation Filter -->
+            <div class="member-controls">
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search family members..."
+                    aria-label="Search family members"
+                >
+
+                <select
+                    id="generationFilter"
+                    aria-label="Filter by generation"
+                >
+                    <option value="all">All Generations</option>
+                    <option value="1">Generation 1</option>
+                    <option value="2">Generation 2</option>
+                    <option value="3">Generation 3</option>
+                </select>
+
+            </div>
+
+            <!-- Family Member Cards -->
+            <div id="familyList" class="family-list"></div>
+
+        </section>
+
+        <!-- About Section -->
+        <section class="about-section" id="aboutSection">
+
+            <h2>About Our Family Heritage</h2>
+
+            <p>
+                This website presents family information and relationships
+                across three generations. Users can explore the family tree,
+                search for family members and filter information by generation.
+            </p>
+
+        </section>
+
+    </main>
+
+    <!-- =====================================
+         FAMILY RELATIONSHIP POPUP
+    ====================================== -->
+
+    <div
+        id="relationshipModal"
+        class="relationship-modal"
+        hidden
+    >
+
+        <div
+            class="relationship-modal-content"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="relationshipTitle"
+        >
+
+            <!-- Close Icon -->
+            <button
+                type="button"
+                id="closeRelationshipModal"
+                class="close-modal"
+                aria-label="Close popup"
             >
+                &times;
+            </button>
 
-            <select id="generationFilter" aria-label="Filter by generation">
-                <option value="all">All Generations</option>
-                <option value="1">Generation 1</option>
-                <option value="2">Generation 2</option>
-                <option value="3">Generation 3</option>
-            </select>
+            <p class="eyebrow">FAMILY HERITAGE</p>
+
+            <!-- Selected Family Member Name -->
+            <h2 id="relationshipTitle">
+                Family Relationships
+            </h2>
+
+            <!-- Relationship Information Appears Here -->
+            <div
+                id="relationshipContent"
+                class="relationship-content"
+            ></div>
+
+            <!-- Close Button -->
+            <button
+                type="button"
+                id="closeRelationshipButton"
+            >
+                Close
+            </button>
+
         </div>
 
-        <div id="familyList" class="family-list"></div>
+    </div>
 
-        <div id="relationshipDetails" class="relationship-details" hidden>
-            <h3 id="relationshipTitle">Family Relationships</h3>
-            <div id="relationshipContent"></div>
-        </div>
-    </section>
+    <!-- Footer -->
+    <footer>
+        <p>My Family Heritage &copy; 2026</p>
+        <a href="#home">Back to Top ↑</a>
+    </footer>
 
-</main>
-
-<footer>
-    <p>My Family Heritage &copy; 2026</p>
-</footer>
-
-<script src="js/model.js"></script>
-<script src="js/view.js"></script>
-<script src="js/controller.js"></script>
+    <!-- JavaScript Files: Keep This Order -->
+    <script src="js/model.js"></script>
+    <script src="js/view.js"></script>
+    <script src="js/controller.js"></script>
 
 </body>
 </html>

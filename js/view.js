@@ -143,7 +143,7 @@ const FamilyView = {
         const parentsConnector = line("parents-connector");
         content.appendChild(parentsConnector);
 
-        // Vertical stem and horizontal line for the children
+        // Connector above children
         const childrenConnector = document.createElement("div");
         childrenConnector.className = "children-connector-new";
 
@@ -174,26 +174,116 @@ const FamilyView = {
         tree.appendChild(content);
     },
 
+    // Display family relationships in a popup
     showRelationships(person, father, mother, spouseNames, children) {
-        const message = document.getElementById("message");
-        message.replaceChildren();
+        const modal = document.getElementById("relationshipModal");
+        const title = document.getElementById("relationshipTitle");
+        const content = document.getElementById("relationshipContent");
 
-        const title = document.createElement("h3");
+        if (!modal || !title || !content) {
+            console.error("Relationship popup elements were not found.");
+            return;
+        }
+
+        // Set popup title
         title.textContent = `${person.name}'s Family Relationships`;
 
+        // Clear previous information
+        content.replaceChildren();
+
+        // Relationship information
         const details = [
-            `Father: ${father?.name || "Unknown"}`,
-            `Mother: ${mother?.name || "Unknown"}`,
-            `Spouse: ${spouseNames.join(", ") || "None recorded"}`,
-            `Children: ${children.map(child => child.name).join(", ") || "None recorded"}`
+            {
+                label: "Father",
+                value: father?.name || "Unknown"
+            },
+            {
+                label: "Mother",
+                value: mother?.name || "Unknown"
+            },
+            {
+                label: "Spouse",
+                value: spouseNames.join(", ") || "None recorded"
+            },
+            {
+                label: "Children",
+                value: children.map(child => child.name).join(", ") ||
+                    "None recorded"
+            }
         ];
 
-        message.appendChild(title);
-
+        // Create relationship information cards
         details.forEach(detail => {
-            const paragraph = document.createElement("p");
-            paragraph.textContent = detail;
-            message.appendChild(paragraph);
+            const item = document.createElement("div");
+            item.className = "relationship-item";
+
+            const label = document.createElement("strong");
+            label.textContent = detail.label;
+
+            const value = document.createElement("p");
+            value.textContent = detail.value;
+
+            item.append(label, value);
+            content.appendChild(item);
         });
+
+        // Show popup
+        modal.hidden = false;
+
+        // Focus on close button
+        document.getElementById("closeRelationshipModal")?.focus();
     }
 };
+
+
+// =========================================
+// SETUP RELATIONSHIP POPUP
+// =========================================
+
+function setupRelationshipModal() {
+    const modal = document.getElementById("relationshipModal");
+    const closeButton = document.getElementById("closeRelationshipModal");
+    const closeMainButton = document.getElementById("closeRelationshipButton");
+
+    // Check whether popup elements exist
+    if (!modal || !closeButton || !closeMainButton) {
+        console.error("Relationship popup elements are missing.");
+        return;
+    }
+
+    // Close popup
+    function closeModal() {
+        modal.hidden = true;
+    }
+
+    // Close using X button
+    closeButton.addEventListener("click", closeModal);
+
+    // Close using Close button
+    closeMainButton.addEventListener("click", closeModal);
+
+    // Close when clicking the dark background
+    modal.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+
+    // Close when pressing Escape
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && !modal.hidden) {
+            closeModal();
+        }
+    });
+}
+
+
+// Initialize popup event listeners
+if (document.readyState === "loading") {
+    document.addEventListener(
+        "DOMContentLoaded",
+        setupRelationshipModal
+    );
+} else {
+    setupRelationshipModal();
+}
